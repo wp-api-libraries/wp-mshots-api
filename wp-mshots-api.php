@@ -5,6 +5,17 @@
  * @package WP-MShots-API
  */
 
+/*
+* Plugin Name: WP MShots API
+* Plugin URI: https://github.com/wp-api-libraries/wp-mshots-api
+* Description: Perform API requests to -MShots in WordPress.
+* Author: WP API Libraries
+* Version: 1.0.0
+* Author URI: https://wp-api-libraries.com
+* GitHub Plugin URI: https://github.com/wp-api-libraries/wp-mshots-api
+* GitHub Branch: master
+*/
+
 /* Exit if accessed directly */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 

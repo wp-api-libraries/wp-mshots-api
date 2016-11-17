@@ -75,7 +75,7 @@ if ( ! class_exists( 'MShotsAPI' ) ) {
 		 */
 		public function get_screenshot( $url, $width ) {
 
-			$request = $this->base_uri . url_encode( $url ) . '?w=' . url_encode( $width );
+			$request = $this->base_uri . urlencode( $url ) . '?w=' . urlencode( $width );
 
 			return $this->fetch( $request );
 

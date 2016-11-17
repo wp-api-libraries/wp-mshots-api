@@ -4,7 +4,6 @@
  *
  * @package WP-MShots-API
  */
-
 /*
 * Plugin Name: WP MShots API
 * Plugin URI: https://github.com/wp-api-libraries/wp-mshots-api
@@ -15,25 +14,20 @@
 * GitHub Plugin URI: https://github.com/wp-api-libraries/wp-mshots-api
 * GitHub Branch: master
 */
-
 /* Exit if accessed directly */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
-
 /* Check if class exists. */
 if ( ! class_exists( 'MShotsAPI' ) ) {
-
 	/**
 	 * MShotsAPI class.
 	 */
 	class MShotsAPI {
-
 		 /**
 		 * URL to the API.
 		 *
 		 * @var string
 		 */
 		private $base_uri = 'https://s.wordpress.com/mshots/v1/';
-
 		/**
 		 * __construct function.
 		 *
@@ -42,7 +36,6 @@ if ( ! class_exists( 'MShotsAPI' ) ) {
 		 */
 		public function __construct() {
 		}
-
 		 /**
 		 * Fetch the request from the API.
 		 *
@@ -51,20 +44,14 @@ if ( ! class_exists( 'MShotsAPI' ) ) {
 		 * @return $body Body.
 		 */
 		private function fetch( $request ) {
-
 			$response = wp_remote_get( $request );
 			$code = wp_remote_retrieve_response_code( $response );
-
 			if ( 200 !== $code ) {
 				return new WP_Error( 'response-error', sprintf( __( 'Server response code: %d', 'text-domain' ), $code ) );
 			}
-
 			$body = wp_remote_retrieve_body( $response );
-
 			return json_decode( $body );
-
 		}
-
 		/**
 		 * Get Screenshot
 		 *
@@ -73,14 +60,15 @@ if ( ! class_exists( 'MShotsAPI' ) ) {
 		 * @param mixed $width Width.
 		 * @return void
 		 */
-		public function get_screenshot( $url, $width ) {
-
+		public function get_screenshot( $url, $width, $download = false ) {
 			$request = $this->base_uri . urlencode( $url ) . '?w=' . urlencode( $width );
 
-			return $this->fetch( $request );
-
+			if ( false === $download ) {
+				return $request ;
+			} else {
+				return $this->fetch( $request );
+			}
 		}
 
 	}
-
 }
